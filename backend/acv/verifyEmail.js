@@ -1,5 +1,4 @@
-const isverifyEmail = (email) => {
+const isValidEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
-
-module.exports = isverifyEmail
+module.exports = isValidEmail

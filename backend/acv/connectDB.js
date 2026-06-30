@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const connectDB = async() => {
     try {
         await mongoose.connect("mongodb://localhost:27017/User")
-        console.log(`MONGODB connected successfully`)
+        console.log("MONOGDB connected successfully")
     }
     catch (err) {
         console.error(`Error to connect mongodb: `, err)
@@ -13,4 +13,12 @@ const connectDB = async() => {
 
 
 module.exports = connectDB
+
+
+
+
+
+
+
+
 
