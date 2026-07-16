@@ -1,32 +1,19 @@
-const express = require("express")
-const userRoute = require("./routes/userRoute")
-const taskRoute = require("./routes/taskroute")
-const connectDB = require("./acv/connectDB")
-const dotenv = require("dotenv")
-dotenv.config()
-const cookieParser = require("cookie-parser")
-const cors = require("cors")
-
-const app = express()
-
-connectDB()
-
-app.use(express.json())
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
-}))
-app.use(cookieParser())
-app.use(userRoute)
-app.use(taskRoute)
+const mongoose = require("mongoose")
 
 
-const PORT = 3000
 
+const ff = async() => {
+    try {
+        await mongoose.connect("mongodb://localhost:3000/User")
+        console.log("Connected")
+        await mongoose.connection.dropDatabase()
+        console.log("Droped")
+    }
+    catch (err) {
+        console.log(err)
+        process.exit(1)
+    }
+}
 
-app.listen(PORT, () => {
-    console.log(`Server is runing on port ${PORT}`)
-})
-
-
+ff()
 

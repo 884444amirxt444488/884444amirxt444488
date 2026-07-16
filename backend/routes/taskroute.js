@@ -1,15 +1,20 @@
 const express = require("express")
 const router = express.Router()
-const {authenciateAccessToken, authenciateRefreshToken} = require("../acv/authenciate")
 const taskController = require("../controllers/task")
+const {authenciateAccessToken} = require("../acv/authenciate")
 
-router.post("/addTask",authenciateAccessToken, taskController.addTask)
-router.get("/getTasks",authenciateAccessToken, taskController.getTasks)
-router.delete("/deleteAllTasks",authenciateAccessToken, taskController.deleteAllTasks)
-router.delete("/deleteTask/:id",authenciateAccessToken, taskController.deleteTask)
-router.patch("/editTask/:id",authenciateAccessToken, taskController.editTask)
+
+router.post("/addTask/:columnId", authenciateAccessToken, taskController.addTask)
+router.delete("/deleteTask/:taskId", authenciateAccessToken, taskController.deleteTask)
+router.delete("/deleteAllTasks/:columnId", authenciateAccessToken, taskController.deleteAllTasks)
+router.patch("/editTask/:taskId", authenciateAccessToken, taskController.editTask)
+router.get("/getTasks/:columnId", authenciateAccessToken, taskController.getTasks)
+
 
 
 module.exports = router
+
+
+
 
 

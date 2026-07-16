@@ -3,18 +3,28 @@ const router = express.Router()
 const userController = require("../controllers/slged")
 const {authenciateAccessToken, authenciateRefreshToken} = require("../acv/authenciate")
 
-
 router.post("/signup", userController.signup)
 router.post("/login", userController.login)
 router.get("/getProfile", authenciateAccessToken, userController.getProfile)
-router.delete("/deleteProfile", authenciateAccessToken, userController.deleteProfile)
+router.delete("/deleteProfile", authenciateRefreshToken, userController.deleteProfile)
 router.patch("/editProfile", authenciateAccessToken, userController.editProfile)
-router.patch("/editPassword", authenciateAccessToken, userController.editPassword)
 router.post("/refreshToken", authenciateRefreshToken, userController.refreshToken)
-router.post("/getCode", userController.forgottenPassword)
-router.post("/changePassword", userController.changeCode)
-
+router.post("/getCode", userController.getCode)
+router.post("/changePassword", userController.changePassowrd)
+router.post("/editPassword", authenciateAccessToken, userController.editPassword)
+router.post("/logout", authenciateRefreshToken, userController.deleteCookie)
 
 
 
 module.exports = router
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .header {
+            background-color: rgb(27, 0, 114);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            border-radius: 40px;
+            padding: 20px 40px;
+        }
+        .profile {
+            text-align: center;
+            cursor: pointer;
+            margin: 10px 20px;
+        }
+        .mark {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px dotted rgb(0, 255, 42);
+            transition: all 0.4s ease;
+        }
+        .mark:hover {
+            transform: scale(1.1);
+            border: 3px solid rgb(255, 252, 252);
+        }
+        .ProfileT {
+            margin: 0;
+            color: white;
+        }
+        .logo {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 1;
+        }
+        .valed {
+            position: relative;
+            background-color: blue;
+            width: 200px;
+            border-radius: 20px;
+            height: 80px;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .logoImage {
+            position: relative;
+            width: 200px;
+            height: 80px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+
+        }
+        .valed::before {
+            position: absolute;
+            content: "";
+            top: -10px;
+            left: -100px;
+            width: 40px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.313);
+            z-index: 2;
+            rotate: 18deg;
+            backdrop-filter: blur(15px);
+            animation: logoAni 2s ease-in-out 3 backwards;
+        }
+        .fetures {
+            margin: 20px auto;
+
+        }
+        .link {
+            display: inline-block;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            background: black;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px;
+            width: 80px;
+            border: 2px solid blue;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        .link:hover {
+            box-shadow: 0 0 10px rgb(255, 255, 255);
+            transform: scale(1.1);
+        }
+        
+
+
+        @keyframes logoAni {
+            0% {
+                left: -100px;
+            }
+            100% {
+                left: 280px;
+            }
+        }
+
+        .fpD2 {
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .getEmail {
+            max-width: 300px;
+            padding: 15px;
+            border-radius: 20px;
+            background-color: rgb(218, 218, 218);
+            color: rgb(0, 0, 0);
+            box-shadow: 0 0 10px blue;
+        }
+
+        .fpInput {
+            display: block;
+            width: 200px;
+            margin-left: 50px;
+            padding: 13px;
+            border-radius: 15px;
+            font-size: 15px;
+            background: linear-gradient(
+                222deg,
+                rgb(0, 0, 0),
+                rgb(0, 0, 93)
+            );
+            color: white;
+            outline: none;
+        }
+        .btn2 {
+            display: block;
+            margin: 30px auto;
+            width: 100px;
+            background: rgb(14, 0, 74);
+            color:rgb(255, 255, 255);
+            border-radius: 20px;
+            padding: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            border: 1px solid rgb(0, 255, 251);
+        }
+        .btn2:hover {
+            background: linear-gradient(
+                180deg,
+                rgb(229, 255, 0),
+                rgb(0, 238, 255)
+            );
+            color: black;
+        }
+
+
+
+        .btns1 {
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btns2 {
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0 0 10px black;
+            width: 300px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        .btn3 {
+            background-color: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            border-radius: 20px;
+            padding: 8px;
+            font-size: 15px;
+            transition: all 0.2s ease-in-out;
+            margin: 5px;
+        }
+        .btn3:hover {
+            background-color: rgb(251, 255, 0);
+            color: rgb(0, 0, 0);
+            transform: scale(1.1);
+        }
+
+
+        .profile2 {
+            position: relative;
+        }
+        .getProfile {
+            position: absolute;
+            right: 30px;
+            top: -30px;
+            background-color: rgb(0, 0, 110);
+            color: white;
+            border-radius: 20px;
+            padding: 20px;
+            min-width: 300px;
+            box-shadow: 0 0 5px 5px rgba(0, 0, 255, 0.149);
+            border: 1px solid blue;
+        }
+
+        .h {
+            display: flex;
+        }
+
+        .close {
+            background: rgb(255, 0, 0);
+            box-shadow: 0 0 5px rgb(255, 253, 253);
+            border: none;
+            border-radius: 10px;
+            margin-left: auto;
+            cursor: pointer;
+        }
+        .close:hover {
+            background-color: rgb(217, 0, 188);
+        }
+
+        .logout {
+            background: rgba(115, 255, 0, 0);
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            padding: 5px;
+            font-size: 15px;
+            box-shadow: 0 0 5px rgb(0, 255, 255);
+        }
+        .logout:hover {
+            background: white;
+            color: rgba(0, 0, 0, 0.374);
+        }
+
+
+        .✏️_box_password {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .✏️Password {
+            background-color: rgb(255, 153, 0);
+            padding: 20px;
+            min-width: 300px;
+            border-radius: 20px;
+            color: rgb(255, 255, 255);
+            box-shadow: 0 0 10px rgb(0, 238, 255);
+        }
+        .input44 {
+            display: block;
+            margin: 10px 0 10px 40px;
+            width: 200px;
+            padding: 5px;
+            border-radius: 5px;
+            outline: none;
+            color: black;
+            background: rgb(255, 255, 255);
+            box-shadow: 0 0 5px rgb(255, 255, 255);
+            transition: all 0.4s ease-out;
+        }
+        .input44:focus {
+            transform: scale(1.1);
+        }
+        .btn5 {
+            background-color: yellow;
+            color: black;
+            width: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid blue;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        .btn5:hover ,.btn4:hover {
+            background: linear-gradient(
+                45deg,
+                rgb(0, 0, 0), 
+                rgb(0, 255, 24)
+            );
+            color: white;
+        }
+        .btns3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+        .btn4 {
+            background-color: yellow;
+            color: black;
+            width: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid blue;
+            cursor: pointer;
+        }
+        .hs {
+            text-align: center;
+        }
+        
+        
+        .folders {
+            display: flex;
+            justify-content: left;
+            padding: 15px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .folder {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            background-color: rgb(224, 223, 223);
+            min-width: 250px;
+            max-height: 100px;
+            padding: 5px;
+            border-radius: 15px;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .folder:hover {
+            transform: scale(1.1);
+            background: rgb(230, 230, 230);
+            box-shadow: 0 0 20px rgb(255, 255, 255);
+        }
+        .btns7 {
+            margin: 0 5px 0 auto;
+            background-color: red;
+            background-color: rgba(240, 248, 255, 0);
+            display: flex;
+            justify-content: right;
+        }
+        .bbttnn {
+            background-color: rgb(255, 255, 255);
+            margin: 2px 2px 0 0;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .bbttnn:active {
+            background-color: rgb(255, 0, 0);
+        }
+
+        .in {
+            margin: 10px;
+            max-width: 130px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 2px solid rgb(0, 4, 128);
+            background-color: rgba(240, 248, 255, 0);
+            outline: none;
+            padding: 5px;
+            
+        }
+        .in:focus {
+            border-bottom: 2px solid rgb(21, 0, 255);
+        }
+
+        .Add {
+            background-color: rgb(212, 224, 208);
+            display: flex;
+            justify-content: left;
+            padding: 15px;
+            color: rgb(0, 0, 0);
+            border-radius: 20px;
+            min-width: 300px;
+        }
+        .in2 {
+            font-size: 20px;
+            width: 200px;
+            background-color: rgba(240, 248, 255, 0);
+            outline: none;
+            color: rgb(0, 0, 0);
+            padding: 10px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            margin: 15px;
+        }
+
+        .btn {
+            background-color: black;
+            color: yellow;
+            font-size: 17px;
+            cursor: pointer;
+            width: 40px;
+            height: 35px;
+            margin-top: 30px;
+            border-radius: 15px;
+
+        }
+
+
+
+        .all {
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .taskDiv {
+            max-width: 300px;
+            background-color: rgb(248, 248, 248);
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            min-width: 200px;
+            padding: 15px;
+            border-radius: 20px;
+            gap: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.523);
+            max-height: 1000px;
+        }
+        .btn19 {
+            max-width: 40px;
+            background-color: rgba(234, 234, 234, 0.107);
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .btn190 {
+            max-width: 40px;
+            background-color: rgba(234, 234, 234, 0.107);
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            margin-left: auto;
+        }
+        .oopp {
+            max-width: 300px;
+            overflow-wrap: anywhere;
+        }
+        .hr {
+            width: 100%;
+        }
+        .nnnn {
+            margin-top: -10px;
+            margin-bottom: -10px;
+        }
+        .botn {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .btn19:hover, .btn190:hover {
+            background-color: rgb(224, 224, 224);
+        }
+        .Complete {
+            background: rgba(0, 255, 0, 0.059);
+            border-radius: 20px;
+            max-width: 40px;
+            padding: 4px;
+            border: none;
+            cursor: pointer;
+        }
+        .Complete:hover {
+            background-color: rgba(255, 255, 0, 0.123);
+        }
+
+
+        .in3 {
+            max-width: 200px;
+            border-top: none;
+            border-bottom: 1px solid black;
+            border-left: none;
+            border-right: none;
+            outline: none;
+            background-color: inherit;
+            padding: 5px;
+            margin: 20px 0px;
+        }
+        .in3:focus {
+            border-bottom: 1px solid blue;
+        }
+        .textBox {
+            min-width: 10px;
+            padding: 15px;
+            font-size: 18px;
+            min-height: 200px;
+            max-height: 500px;
+            border-radius: 20px;
+            resize: none;
+            outline: none;
+            margin: 20px 0px;
+            
+        }
+
+        .iamtired {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: rgb(244, 244, 244);
+            max-width: 300px;
+            gap: 10px;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 0 5px rgb(0, 238, 255);
+        }
+        .textBox2 {
+            min-width: 10px;
+            padding: 15px;
+            font-size: 18px;
+            min-height: 300px;
+            max-height: 500px;
+            border-radius: 20px;
+            resize: none;
+            outline: none;
+            margin: 20px 0px;
+        }
+        .btn44 {
+            background-color: rgb(255, 255, 255);
+            padding: 10px;
+            margin-right: auto;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        .btn44:hover {
+            background: rgb(130, 0, 115);
+            color: white;
+        }
+        
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <div>
+        <div class="iamtired">
+            <input type="text" placeholder="task: " class="in2" />
+            <textarea class="textBox2" placeholder="description: "></textarea>
+            <button class="btn44">Add</button>
+        </div>
+    </div>
+
+    
+
+
+    
+    
+    
+</body>
+</html>

@@ -2,12 +2,6 @@ const mongoose = require("mongoose")
 
 
 const taskSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-        select: false
-    },
     task: {
         type: String,
         required: [true, "Task is required"],
@@ -23,16 +17,22 @@ const taskSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    dateToFinish: {
-        type: Date,
-        default: Date.now
+    order: {
+        type: Number,
+        required: true
+    },
+    columnId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Column",
+        required: true
     }
+
 
 }, {timestamps: true})
 
 
-module.exports = mongoose.model("Task", taskSchema)
 
+module.exports = mongoose.model("Task", taskSchema)
 
 
 

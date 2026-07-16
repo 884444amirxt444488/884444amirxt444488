@@ -1,14 +1,25 @@
 const Task = require("../models/Task")
+const User = require("../models/User")
+const Column = require("../models/Column")
+
+
 
 exports.addTask = async(req, res) => {
-    const {task, description, dateToFinish} = req.body
-    const userId = req.user._id
+    const {columnId} = req.params
+    const {task, description} = req.body
+    const userId = req.user._id 
     if (!task) {
-        return res.status(400).json({message: "task is required"})
+        return res.status(400).json({message: "Task is required"})
     }
-    try {   
-        const newTask = await Task.create({user: userId, task, description, dateToFinish})
-        res.status(200).json({message: "Task added successfully", _id: newTask._id, task: newTask.task, description: newTask.description, dateToFinish: newTask.dateToFinish})
+    try {
+        const user = await User.findById(userId)
+        if (!user) {
+            return res.status(401).json({message: "User not found"})
+        }
+        const allOrders = await Task.findOne({columnId}).sort({order: -1})
+        const newOrder = allOrders ? allOrders.order + 1 : 1
+        const addTask = await Task.create({task, description, order: newOrder, columnId})
+        res.status(200).json({message: "Task added", _id: addTask._id, task: addTask.task, description: addTask.description, order: addTask.order})
     }
     catch (err) {
         console.error(`Error to add task: `, err)
@@ -17,29 +28,75 @@ exports.addTask = async(req, res) => {
 }
 
 exports.getTasks = async(req, res) => {
+    const {columnId} = req.params
     const userId = req.user._id
     try {
-        const tasks = await Task.find({user: userId}).select("task description completed dateToFinish")
-        if (!tasks) {
-            return res.status(404).json({message: "User do not have tasks"})
+        const column = await Column.findOne({user: userId, _id: columnId})
+        if (!column) {
+            return res.status(401).json({message: "Nothing to send"})
         }
-        res.status(200).json({tasks})
+        const getTasks = await Task.find({columnId}).sort({order: 1})
+        res.status(200).json({message: "Tasks send", getTasks})
     }
     catch (err) {
-        console.error(`Error to getTasks: `, err)
+        console.error(`Error to get tasks: `, err)
+        res.status(500).json({message: "Error from server. please try later"})
+    }
+}
+
+exports.editTask = async(req, res) => {
+    const {task, description, completed, columnId} = req.body
+    const {taskId} = req.params
+    const userId = req.user._id
+    const listToUpdate = {}
+    if (task) {
+        listToUpdate.task = task
+    }
+    if (description) {
+        listToUpdate.description = description
+    }
+    if (completed !== undefined) {
+        listToUpdate.completed = completed
+    }
+    if (Object.keys(listToUpdate).length === 0) {
+        return res.status(400).json({message: "Nothing to update"})
+    }
+    try {
+        const columnExist = await Column.findOne({user: userId, _id: columnId})
+        if (!columnExist) {
+            return res.status(401).json({message: "Column not found"})
+        }
+        const editTask = await Task.findOneAndUpdate({columnId, _id: taskId}, {$set: listToUpdate}, {
+            returnDocument: "after",
+            runValidators: true
+        })
+        if (!editTask) {
+            return res.status(401).json({message: "Task not found for edit"})
+        }
+        res.status(200).json({message: "Task updated successfully", editTask})
+    }
+    catch (err) {
+        console.error(`Error to edit task: `, err)
         res.status(500).json({message: "Error from server. please try later"})
     }
 }
 
 exports.deleteTask = async(req, res) => {
-    const taskId = req.params.id 
+    const {taskId} = req.params
+    const {columnId} = req.body
     const userId = req.user._id
+
     try {
-        const taskToDelete = await Task.findOneAndDelete({user: userId, _id: taskId})
-        if (!taskToDelete) {
-            return res.status(404).json({message: "Task not found"})
+        const column = await Column.findOne({user: userId, _id: columnId})
+        if (!column) {
+            return res.status(404).json({message: "Column not found for this user"})
         }
-        res.status(200).json({message: "Task deleted successfully"})
+        const deleteTask = await Task.findOneAndDelete({_id: taskId, columnId})
+        if (!deleteTask) {
+            return res.status(404).json({message: "Task not found for delete"})
+        }
+        await Task.updateMany({columnId, order: {$gt: deleteTask.order}}, {$inc: {order: -1}})
+        res.status(200).json({message: "Task deleted"})
     }
     catch (err) {
         console.error(`Error to delete task: `, err)
@@ -48,57 +105,18 @@ exports.deleteTask = async(req, res) => {
 }
 
 exports.deleteAllTasks = async(req, res) => {
+    const {columnId} = req.params
     const userId = req.user._id
     try {
-        const deleteTasks = await Task.deleteMany({user: userId})
-        if (deleteTasks.deletedCount === 0) {
-            return res.status(404).json({message: "Tasks not found to delete"})
+        const user = await Column.findOne({user: userId, _id: columnId})
+        if (!user) {
+            return res.status(401).json({message: "user not found"})
         }
-        res.status(200).json({message: "Tasks deleted successfully"})
+        await Task.deleteMany({columnId})
+        res.status(200).json({message: "All tasks deleted"})
     }
     catch (err) {
-        console.error(`Error to deleteAllTasks: `, err)
-        res.status(500).json({message: "Error from server. please try later"})
-    }
-}
-
-exports.editTask = async(req, res) => {
-    const {task, description, dateToFinish, completed} = req.body
-    const userId = req.user._id
-    const taskId = req.params.id
-
-    const listToUpdate = {}
-    if (!task && !description && !dateToFinish && completed === undefined) {
-        return res.status(400).json({message: "Send somthing to update"})
-    }
-    if (task) {
-        listToUpdate.task = task
-    }
-    if (description) {
-        listToUpdate.description = description
-    }
-    if (dateToFinish) {
-        listToUpdate.dateToFinish = dateToFinish
-    }
-    if (completed !== undefined) {
-        listToUpdate.completed = completed
-    }
-    if (Object.keys(listToUpdate).length === 0) {
-        return res.status(400).json({message: "Nothing to update"})
-    }
-
-    try {
-        const editTask = await Task.findOneAndUpdate({user: userId, _id: taskId}, {$set: listToUpdate}, {
-            returnDocument: "after",
-            runValidators: true
-        })
-        if (!editTask) {
-            return res.status(404).json({message: "Nothing found to update"})
-        }
-        res.status(200).json({message: "Task updated successfully", task: editTask, description: editTask.description, completed: editTask.completed, dateToFinish: editTask.dateToFinish})
-    }
-    catch (err) {
-        console.error(`Error to edit task: `, err)
+        console.error(`Error to delete all tasks: `, err)
         res.status(500).json({message: "Error from server. please try later"})
     }
 }

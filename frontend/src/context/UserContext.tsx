@@ -1,36 +1,52 @@
-import React, { createContext, useContext, useState } from "react"
+import api from "../api"
+import { useEffect, useState, useContext, createContext } from "react"
+
 
 type UserType = {
-  username: string
+  username: string,
   email: string
 }
 
+
 type UserContextType = {
-  user: UserType | null
-  setUser: React.Dispatch<React.SetStateAction<UserType | null >>
+  user: UserType | null,
+  setUser: React.Dispatch<React.SetStateAction<UserType | null>>
 }
 
-const userContext = createContext<UserContextType | null>(null)
+const UserContext = createContext<UserContextType | null>(null)
 
-export function UserProvider({
-  children
-}: {
+export function UserProvider({children}: {
   children: React.ReactNode
 }) {
   const [user, setUser] = useState<UserType | null>(null)
-
+  useEffect(() => {
+    const getProfile = async() => {
+      try {
+        const response = await api.get("/getProfile")
+        setUser({
+          username: response.data.username,
+          email: response.data.email 
+        })
+      }
+      catch (err) {
+        console.error(`Error to get profile: `, err)
+        setUser(null)
+      }
+    }
+    getProfile()
+  }, [])
   return (
-    <userContext.Provider value={{user, setUser}}>
+    <UserContext.Provider value={{user, setUser}}>
       {children}
-    </userContext.Provider>
+    </UserContext.Provider>
   )
 }
 
 export function useUser() {
-  const context = useContext(userContext)
-
+  const context = useContext(UserContext)
   if (!context) {
-    throw new Error("useUser must be used inside UserProvider")
+    throw new Error("UserProvider must be in user provider")
   }
   return context
 }
+

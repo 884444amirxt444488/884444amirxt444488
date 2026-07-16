@@ -6,6 +6,7 @@ const api = axios.create({
     withCredentials: true
 })
 
+
 api.interceptors.request.use(
     (config) => {
         const accessToken = localStorage.getItem("accessToken")
@@ -13,26 +14,28 @@ api.interceptors.request.use(
             config.headers.authorization = `Bearer ${accessToken}`
         }
         return config
-    }, 
+    },
     (error) => {
         return Promise.reject(error)
     }
 )
 
+
 api.interceptors.response.use(
     (response) => response,
     async(error) => {
         const originalResponse = error.config
-        if (error.response?.data?.code === "INVALID_LOGIN1" && !originalResponse._retry()) {
+        if (error.response?.data?.code === "INVALID_ACCESSTOKEN" && !originalResponse._retry) {
+            originalResponse._retry = true
             try {
-                originalResponse._retry = true
-                const refreshToken = await api.post("/refreshToken")
-                localStorage.setItem("accessToken", refreshToken.data.accessToken)
-                originalResponse.headers.authorization = `Bearer ${refreshToken.data.accessToken}`
+                const response2 = await api.post("/refreshToken")
+                localStorage.setItem("accessToken", response2.data.accessToken)
+                originalResponse.headers.authorization = `Bearer ${response2.data.accessToken}`
                 return api(originalResponse)
             }
             catch (err) {
                 localStorage.removeItem("accessToken")
+                return Promise.reject(err)
             }
         }
         return Promise.reject(error)
@@ -40,5 +43,9 @@ api.interceptors.response.use(
 )
 
 
+
 export default api
+
+
+
 

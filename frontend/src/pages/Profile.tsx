@@ -1,126 +1,108 @@
-import axios from "axios"
 import api from "../api"
-import { useState } from "react"
+import { AxiosError } from "axios"
+import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
+import { QueryClient, useMutation } from "@tanstack/react-query"
+import { useUser } from "../context/UserContext"
+import { useState } from "react"
+import { Link } from "react-router-dom"
 
 
-function getProfile() {
-    const [username, setUsername] = useState("None")
-    const [email, setEmail] = useState("None")
-    const [message, setMessage] = useState("")
 
+type Props = {
+    setShowProfile: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+
+function Profile({setShowProfile}: Props) {
+    
     const navigate = useNavigate()
+    const {user, setUser} = useUser()
 
-    const [deleteMessage, setDeleteMessage] = useState("")
-
-
-    const [editUsername, setEditUsername] = useState("")
-    const [editEmail, setEditEmail] = useState("")
-    const [isTrue, setIsTrue] = useState(false)
-    const [editMessage, setEditMessage] = useState("")
+    const [deleteProfile2, setDeleteProfile] = useState(0)
 
 
-    const getprofile = async() => {
-        try {
-            const response = await api.get("/getProfile")
-            setUsername(response.data.username)
-            setEmail(response.data.email)
-            setMessage(response.data.message)
-        }
-        catch (err) {
-            if (axios.isAxiosError(err)) {
-                setMessage(err.response?.data?.message || err.message)
-            }
-            else {
-                setMessage("Unknown Error")
-            }
-        }
-    }
-    const deleteProfile = async() => {
-        try {
+    const deleteProfile = useMutation({
+        mutationFn: async() => {
             const response = await api.delete("/deleteProfile")
+            return response.data
+        },
+        onSuccess: (data) => {
+            toast.success(data.message)
             localStorage.removeItem("accessToken")
-            setDeleteMessage(response.data.message)
-            setTimeout(() => {
-                navigate("/signup")
-            }, 2000)
+            setUser(null)
+            navigate("/signup")
+        },
+        onError: (err: AxiosError<{message: string}>) => {
+            toast.error(err.response?.data?.message || err?.message || "Unknown Error")
         }
-        catch (err) {
-            if (axios.isAxiosError(err)) {
-                setDeleteMessage(err.response?.data?.message || err.message)
-            }
-            else {
-                setDeleteMessage("Unknown Error")
-            }
+    })
+
+    const logout = useMutation({
+        mutationFn: async() => {
+            localStorage.removeItem("accessToken")
+            const response = await api.post("/logout")
+            return response.data
+        },
+        onSuccess: (data) => {
+            toast.success(data.message)
+            navigate("/login")
+            setShowProfile(false)
+            setUser(null)
+        },
+        onError: (err: AxiosError<{message: string}>) => {
+            toast.error(err.response?.data?.message || err?.message || "Unknown Error")
         }
-    }
-    const editProfile = async() => {
-        try {
-            const response = await api.patch("/editProfile", 
-                {
-                    username: editUsername,
-                    email: editEmail
-                }
-            )
-            setEditMessage(response.data.message)
-            setUsername(response.data.username)
-            setEmail(response.data.email)
-        }
-        catch (err) {
-            if (axios.isAxiosError(err)) {
-                setEditMessage(err.response?.data?.message || err.message)
-            }
-            else {
-                setEditMessage("Unknown error")
-            }
-        }
-    }
+    })
+
 
     return (
-        <div>
-            <h1>username: {username}</h1>
-            <h2>email: {email}</h2>
-            <button onClick={getprofile}>
-                get Profile
-            </button>
-            <h2>{message}</h2>
-            <button onClick={deleteProfile}>
-                delete profile
-            </button>
-            <h1>{deleteMessage}</h1>
-            <button onClick={() => {
-                setIsTrue(!isTrue)
-                setEditUsername(username)
-                setEditEmail(email)
-            }}>
-                {
-                    isTrue
-                    ? "close"
-                    : "edit"
-                }
-            </button>
-            {
-                isTrue && (
-                    <div>
-                        <input type="text" placeholder="enter your new username: " value={editUsername} onChange={(e) => setEditUsername(e.target.value)} />
-                        <input type="email" placeholder="enter your new email: " value={editEmail} onChange={(e) => setEditEmail(e.target.value)} />
-                        <button onClick={editProfile}>
-                            Edit profile
-                        </button>
-                        <h1>{editMessage}</h1>
-                    </div>
-                )
-            }
+        <div className="profile2">
+            <div className="getProfile">
+                <div className="h">
+                    <button className="logout" onClick={() => {
+                        logout.mutate()
+                    }}>Exit</button>
+                    <button className="close" onClick={() => {
+                        setShowProfile(false)
+                    }}>❌</button>
+                </div>
+                <h3>Username: {user?.username}</h3>
+                <h3>Email: {user?.email}</h3>
+                <button onClick={() => {
+                    const newNumber = deleteProfile2 + 1
+                    setDeleteProfile(newNumber)
+                    if (newNumber === 1) {
+                        toast.error("Click again for delete profile")
+                    }
+                    else if (newNumber === 2) {
+                        toast.error("It can not back.")
+                    }
+                    else {
+                        setDeleteProfile(0)
+                        deleteProfile.mutate()
+                    }
+ 
+                }} className="btn3">Delete profile {
+                    deleteProfile2 === 0
+                    ? ""
+                    : deleteProfile2 
+                }</button>
+                <Link to={"/editProfile"} className="btn3" onClick={() => {
+                    setShowProfile(false)
+                }}>Edit profile</Link>
+            </div>
         </div>
+
+
     )
+
+
+
 }
 
 
 
-export default getProfile
 
 
-
-
-
-
+export default Profile

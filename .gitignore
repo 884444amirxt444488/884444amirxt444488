@@ -1,8 +1,11 @@
-backend/node_modules
-frontend/node_modules
+# dependencies
+node_modules/
 
-backend/.env
-frontend/.env
+# environment
+.env
 
-backend/dist
-frontend/dist
+# build
+dist/
+
+# editor
+.vscode/

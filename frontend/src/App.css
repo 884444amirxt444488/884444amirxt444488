@@ -1,187 +1,4 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-}
-
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
-
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
-}
-
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
-
-.ticks {
-  position: relative;
-  width: 100%;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
-
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
-}
 
 .ff {
   background-color: rgb(46, 0, 91);
@@ -189,8 +6,1324 @@
 }
 
 .ll {
-  margin: 100px;
+  margin: 20px;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border: 2px solid yellow;
+  width: 100px;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 20px;
+
+}
+.ll:hover {
+  transition: all 0.4s ease;
+  box-shadow: 0 0 50px 10px rgb(25, 0, 255);
+}
+body {
+  margin: 5px 10px;
+  font-family: Arial, sans-serif;
+  background: rgb(189, 205, 205);
+}
+.tt {
+  background: linear-gradient(
+    160deg,
+    blue,
+    black
+  );
+  color: rgb(255, 255, 0);
+  text-align: center;
+  margin: 10px 20px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 10px rgba(0, 255, 17, 0.68);
+}
+.pp {
+  margin: 50px 60px;
+}
+.oo {
+  background: linear-gradient(
+    140deg,
+    rgb(0, 0, 0),
+    rgb(48, 48, 48)
+  );
+  color: rgb(255, 255, 255);
+  padding: 30px;
+  border-radius: 20px;
+  margin: 80px auto 0 auto;
+  border: 1px solid black;
+  text-align: center;
+  width: 300px;
+  height: 340px;
+
+}
+.in {
+  width: 200px;
+  display: block;
+  margin: 30px auto;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 20px;
+  border: 2px solid rgb(248, 0, 0);
+  outline: none;
+}
+.in:focus {
+  background: linear-gradient(
+    160deg,
+    rgb(0, 0, 75),
+    rgb(0, 0, 0)
+  );
+  color: white;
+  border: 2px solid rgb(255, 251, 251);
+}
+.jj {
+  text-align: center;
+  color: yellow;
 }
 
+.ccgol {
+  background-color: rgb(0, 0, 92);
+  color: yellow;
+  padding: 20px;
+  transition: all 0.8s ease;
+  transform: translateX(15px);
+
+}
+.loader {
+  position: absolute;
+  left: 45vw;
+  top: 45vh;
+  display: block;
+  width: 100px;
+  height: 100px;
+  --ss: 20deg;
+  background: conic-gradient(
+    blue 0deg var(--ss),
+    transparent var(--ss)
+  );
+  border-radius: 50%;
+
+  mask: radial-gradient(circle, transparent 50%, black 70%);
+
+  animation: aa 4s ease infinite forwards;
+
+}
+
+.divS {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.062);
+            backdrop-filter: blur(1px);
+            border-radius: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        .s1 {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background-color: rgb(9, 0, 130);
+            margin: 10px;
+            border-radius: 50%;
+            animation: ss1 1s ease infinite forwards;
+        }
+        .s2 {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background-color: rgb(255, 0, 0);
+            margin: 10px;
+            border-radius: 50%;
+            animation: ss2 1s ease infinite forwards;
+        }
 
 
+        @keyframes ss1 {
+            0% {
+                transform: scale(0.8);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(0.8);
+            }
+        }
+
+        @keyframes ss2 {
+            0% {
+                transform: scale(1.2);
+            }
+            50% {
+                transform: scale(0.8);
+            }
+            100% {
+                transform: scale(1.2);
+            }
+        }
+
+
+@property --ss {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 20deg;
+}
+
+@keyframes aa {
+  0% {
+    --ss: 20deg;
+  }
+  50% {
+    --ss: 180deg;
+  }
+  100% {
+    --ss: 360deg;
+  }
+}
+
+.overlay {
+            position: fixed;
+            display: grid;
+            place-items: center;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.397);
+        }
+        .ww {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            position: fixed;
+            background-color: rgb(137, 13, 13);
+            color: white;
+            backdrop-filter: blur(5px);
+            min-width: 300px;
+            max-width: 500px;
+            height: 250px;
+            border-radius: 20px;
+            padding: 10px;
+            border: 1px solid red;
+            box-shadow: 0 0 20px 2px rgba(255, 0, 0, 0.26);
+        }
+        .bbbb {
+            background: linear-gradient(
+                45deg,
+                rgb(0, 238, 255),
+                yellow,
+                rgb(255, 255, 255),
+                white
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+      * {
+            box-sizing: border-box;
+        }
+        .header {
+            background-color: rgb(27, 0, 116);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            border-radius: 40px;
+            padding: 20px 40px;
+        }
+        .profile {
+            text-align: center;
+            cursor: pointer;
+            margin: 10px 20px;
+        }
+        .mark {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px dotted rgb(0, 255, 42);
+            transition: all 0.4s ease;
+        }
+        .mark:hover {
+            transform: scale(1.1);
+            border: 3px solid rgb(255, 252, 252);
+        }
+        .ProfileT {
+            margin: 0;
+            color: white;
+        }
+        .logo {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 1;
+        }
+        .valed {
+            position: relative;
+            background-color: blue;
+            width: 200px;
+            border-radius: 20px;
+            height: 80px;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .logoImage {
+            position: relative;
+            width: 200px;
+            height: 80px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+
+        }
+        .valed::before {
+            position: absolute;
+            content: "";
+            top: -10px;
+            left: -100px;
+            width: 40px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.313);
+            z-index: 2;
+            rotate: 18deg;
+            backdrop-filter: blur(15px);
+            animation: logoAni 2s ease-in-out 3 backwards;
+        }
+        .fetures {
+            margin: 20px auto;
+
+        }
+        .link {
+            display: inline-block;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            background: black;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px;
+            width: 80px;
+            border: 2px solid blue;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        .link:hover {
+            box-shadow: 0 0 10px rgb(255, 255, 255);
+            transform: scale(1.1);
+        }
+        
+
+
+        @keyframes logoAni {
+            0% {
+                left: -100px;
+            }
+            100% {
+                left: 280px;
+            }
+        }
+
+        .signup_div {
+            margin: 15px;
+        }
+
+        .signup {
+            margin: 10px auto;
+            min-width: 200px;
+            max-width: 300px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.872);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgb(255, 0, 0);
+            text-align: center;
+        }
+        .signup_text {
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .signup_spans {
+            margin: 10px 20px;
+            display: block;
+            text-align: left;
+            color: rgb(0, 0, 0);
+        }
+        .inputs {
+            width: 200px;
+            padding: 10px;
+            border-radius: 15px;
+            font-size: 15px;
+            color: white;
+            background: linear-gradient(
+                22deg,
+                rgb(0, 0, 0),
+                rgb(13, 0, 44)
+            );
+            transition: all 0.4s ease;
+            outline: none;
+        }
+        .inputs:focus {
+            transform: scale(1.1);;
+        }
+        .btn {
+            display: block;
+            margin: 30px auto;
+            width: 100px;
+            background: rgb(14, 0, 74);
+            color:rgb(255, 255, 255);
+            border-radius: 20px;
+            padding: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            border: 1px solid rgb(0, 255, 251);
+        }
+        .btn:hover {
+            background: linear-gradient(
+                180deg,
+                rgb(229, 255, 0),
+                rgb(0, 238, 255)
+            );
+            color: black;
+        }
+        .login_div {
+            margin: 15px;
+        }
+
+        .login {
+            margin: 10px auto;
+            min-width: 200px;
+            max-width: 300px;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.872);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgb(0, 229, 255);
+            text-align: center;
+            color: white;
+        }
+        .login_text {
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .login_spans {
+            margin: 10px 20px;
+            display: block;
+            text-align: left;
+            color: rgb(255, 255, 255);
+        }
+        .inputs2 {
+            width: 200px;
+            padding: 10px;
+            border-radius: 15px;
+            font-size: 15px;
+            color: rgb(0, 0, 0);
+            background: linear-gradient(
+                22deg,
+                rgb(255, 255, 255),
+                rgb(180, 180, 180)
+            );
+            transition: all 0.4s ease;
+            outline: none;
+        }
+        .inputs2:focus {
+            transform: scale(1.1);;
+        }
+        .btn {
+            display: block;
+            margin: 30px auto;
+            width: 100px;
+            background: rgb(14, 0, 74);
+            color:rgb(255, 255, 255);
+            border-radius: 20px;
+            padding: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            border: 1px solid rgb(0, 255, 251);
+        }
+        .btn:hover {
+            background: linear-gradient(
+                180deg,
+                rgb(229, 255, 0),
+                rgb(0, 238, 255)
+            );
+            color: black;
+        }
+        .fpD {
+            display: flex;
+            margin: 15px;
+        }
+        .fp {
+            color: rgb(4, 4, 255);
+            margin-left: 10px;
+        }
+        .login_spans2 {
+            display: inline-block;
+            color: rgb(255, 255, 255);
+        }
+        .btns1 {
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btns2 {
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0 0 10px black;
+            width: 300px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        .btn3 {
+            background-color: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            border-radius: 20px;
+            padding: 8px;
+            font-size: 15px;
+            transition: all 0.2s ease-in-out;
+            margin: 5px;
+        }
+        .btn3:hover {
+            background-color: rgb(251, 255, 0);
+            color: rgb(0, 0, 0);
+            transform: scale(1.1);
+        }
+        .changePass {
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .changePassAll {
+            max-width: 300px;
+            padding: 15px;
+            border-radius: 20px;
+            background-color: rgb(218, 218, 218);
+            color: rgb(0, 0, 0);
+            box-shadow: 0 0 10px blue;
+        }
+
+        .np {
+            display: block;
+            width: 200px;
+            margin-left: 50px;
+            margin-top: 5px;
+            padding: 13px;
+            border-radius: 15px;
+            font-size: 15px;
+            background: linear-gradient(
+                222deg,
+                rgb(0, 0, 0),
+                rgb(0, 0, 93)
+            );
+            color: white;
+            outline: none;
+        }
+        .btn2 {
+            display: block;
+            margin: 30px auto;
+            width: 100px;
+            background: rgb(14, 0, 74);
+            color:rgb(255, 255, 255);
+            border-radius: 20px;
+            padding: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            border: 1px solid rgb(0, 255, 251);
+        }
+        .btn2:hover {
+            background: linear-gradient(
+                180deg,
+                rgb(229, 255, 0),
+                rgb(0, 238, 255)
+            );
+            color: black;
+        }
+
+
+
+        .btns1 {
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btns2 {
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0 0 10px black;
+            width: 300px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        .btn3 {
+            background-color: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            border-radius: 20px;
+            padding: 8px;
+            font-size: 15px;
+            transition: all 0.2s ease-in-out;
+            margin: 5px;
+        }
+        .btn3:hover {
+            background-color: rgb(251, 255, 0);
+            color: rgb(0, 0, 0);
+            transform: scale(1.1);
+        }
+        .fpD2 {
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .getEmail {
+            max-width: 300px;
+            padding: 15px;
+            border-radius: 20px;
+            background-color: rgb(218, 218, 218);
+            color: rgb(0, 0, 0);
+            box-shadow: 0 0 10px blue;
+        }
+
+        .fpInput {
+            display: block;
+            width: 200px;
+            margin-left: 50px;
+            padding: 13px;
+            border-radius: 15px;
+            font-size: 15px;
+            background: linear-gradient(
+                222deg,
+                rgb(0, 0, 0),
+                rgb(0, 0, 93)
+            );
+            color: white;
+            outline: none;
+        }
+        .btn2 {
+            display: block;
+            margin: 30px auto;
+            width: 100px;
+            background: rgb(14, 0, 74);
+            color:rgb(255, 255, 255);
+            border-radius: 20px;
+            padding: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            border: 1px solid rgb(0, 255, 251);
+        }
+        .btn2:hover {
+            background: linear-gradient(
+                180deg,
+                rgb(229, 255, 0),
+                rgb(0, 238, 255)
+            );
+            color: black;
+        }
+
+
+
+        .btns1 {
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btns2 {
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0 0 10px black;
+            width: 300px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        .btn3 {
+            background-color: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            border-radius: 20px;
+            padding: 8px;
+            font-size: 15px;
+            transition: all 0.2s ease-in-out;
+            margin: 5px;
+            text-decoration: none;
+        }
+        .btn3:hover {
+            background-color: rgb(251, 255, 0);
+            color: rgb(0, 0, 0);
+            transform: scale(1.1);
+        }
+        .profile2 {
+            position: relative;
+        }
+        .getProfile {
+            position: absolute;
+            right: 30px;
+            top: -30px;
+            background-color: rgb(0, 0, 110);
+            color: white;
+            border-radius: 20px;
+            padding: 20px;
+            min-width: 300px;
+            box-shadow: 0 0 5px 5px rgba(0, 0, 255, 0.169);
+            border: 1px solid blue;
+        }
+
+        .h {
+            display: flex;
+        }
+
+        .close {
+            background: rgb(255, 0, 0);
+            box-shadow: 0 0 5px rgb(255, 253, 253);
+            border: none;
+            border-radius: 10px;
+            margin-left: auto;
+            cursor: pointer;
+        }
+        .close:hover {
+            background-color: rgb(217, 0, 188);
+        }
+
+        .logout {
+            background: rgba(115, 255, 0, 0);
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            padding: 5px;
+            font-size: 15px;
+            box-shadow: 0 0 5px rgb(0, 255, 255);
+        }
+        .logout:hover {
+            background: white;
+            color: rgba(0, 0, 0, 0.374);
+        }
+        .edit_box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .editProfile {
+            background-color: rgb(255, 153, 0);
+            padding: 20px;
+            min-width: 300px;
+            border-radius: 20px;
+            color: rgb(255, 255, 255);
+        }
+        .input44 {
+            display: block;
+            margin: 10px 0 10px 60px;
+            width: 200px;
+            padding: 5px;
+            border-radius: 5px;
+            outline: none;
+            color: black;
+            background: rgb(255, 255, 255);
+            box-shadow: 0 0 5px rgb(255, 255, 255);
+            transition: all 0.4s ease-out;
+        }
+        .input44:focus {
+            transform: scale(1.1);
+        }
+        .btn5 {
+            background-color: yellow;
+            color: black;
+            width: 50px;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid blue;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        .btn5:hover ,.btn6:hover {
+            background: linear-gradient(
+                45deg,
+                rgb(0, 0, 0), 
+                rgb(0, 255, 26)
+            );
+            color: white;
+        }
+        .btns3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+        .btn6 {
+            background-color: yellow;
+            color: black;
+            width: 80px;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid blue;
+            cursor: pointer;
+        }
+        .hs {
+            text-align: center;
+        } 
+        .edit_box_password {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .editPassword {
+            background-color: rgb(255, 153, 0);
+            padding: 20px;
+            min-width: 300px;
+            border-radius: 20px;
+            color: rgb(255, 255, 255);
+            box-shadow: 0 0 10px rgb(0, 238, 255);
+        }
+        .input44 {
+            display: block;
+            margin: 10px 0 10px 60px;
+            width: 200px;
+            padding: 5px;
+            border-radius: 5px;
+            outline: none;
+            color: black;
+            background: rgb(255, 255, 255);
+            box-shadow: 0 0 5px rgb(255, 255, 255);
+            transition: all 0.4s ease-out;
+        }
+        .input44:focus {
+            transform: scale(1.1);
+        }
+        .btn5 {
+            background-color: yellow;
+            color: black;
+            width: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid blue;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        .btn5:hover ,.btn6:hover {
+            background: linear-gradient(
+                45deg,
+                rgb(0, 0, 0), 
+                rgb(0, 255, 26)
+            );
+            color: white;
+        }
+        .btns3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+        .btn6 {
+            background-color: yellow;
+            color: black;
+            width: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid blue;
+            cursor: pointer;
+        }
+        .hs {
+            text-align: center;
+        } 
+
+        .folders {
+            display: flex;
+            justify-content: left;
+            padding: 15px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .folder {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            background-color: rgb(224, 223, 223);
+            min-width: 300px;
+            max-height: 100px;
+            padding: 5px;
+            border-radius: 15px;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .folder:hover {
+            transform: scale(1.1);
+            background: rgb(230, 230, 230);
+            box-shadow: 0 0 20px rgb(255, 255, 255);
+        }
+        .btns7 {
+            margin: 0 5px 0 auto;
+            background-color: red;
+            background-color: rgba(240, 248, 255, 0);
+            display: flex;
+            justify-content: right;
+        }
+        .bbttnn {
+            background-color: rgb(255, 255, 255);
+            margin: 2px 2px 0 0;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .bbttnn:active {
+            background-color: rgb(255, 0, 0);
+        }
+
+        .in {
+            margin: 10px;
+            max-width: 130px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 2px solid rgb(0, 6, 128);
+            background-color: rgba(240, 248, 255, 0);
+            outline: none;
+            padding: 5px;
+            
+        }
+        .in:focus {
+            border-bottom: 2px solid rgb(21, 0, 255);
+        }
+
+        .Add {
+            background-color: rgb(212, 224, 208);
+            display: flex;
+            justify-content: left;
+            padding: 15px;
+            color: rgb(0, 0, 0);
+            border-radius: 20px;
+            min-width: 300px;
+            margin-top: 20px;
+        }
+        .in2 {
+            font-size: 20px;
+            width: 200px;
+            background-color: rgba(240, 248, 255, 0);
+            outline: none;
+            color: rgb(0, 0, 0);
+            padding: 5px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            margin: 15px;
+        }
+
+        .btn15 {
+            background-color: black;
+            color: yellow;
+            font-size: 17px;
+            cursor: pointer;
+            width: 60px;
+            height: 35px;
+            margin: 20px auto 0 0;
+            border-radius: 15px;
+
+        }
+
+        .bbbbbbbb {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .all {
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .taskDiv {
+            max-width: 300px;
+            background-color: rgb(248, 248, 248);
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            min-width: 200px;
+            padding: 15px;
+            border-radius: 20px;
+            gap: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.523);
+            max-height: 1000px;
+        }
+        .btn19 {
+            max-width: 40px;
+            background-color: rgba(234, 234, 234, 0.107);
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .btn190 {
+            max-width: 40px;
+            background-color: rgba(234, 234, 234, 0.107);
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            margin-left: auto;
+        }
+        .oopp {
+            max-width: 300px;
+            overflow-wrap: anywhere;
+        }
+        .hr {
+            width: 100%;
+        }
+        .nnnn {
+            margin-top: -10px;
+            margin-bottom: -10px;
+        }
+        .botn {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .btn19:hover, .btn190:hover {
+            background-color: rgb(224, 224, 224);
+        }
+        .Complete {
+            background: rgba(0, 255, 0, 0.059);
+            border-radius: 20px;
+            max-width: 40px;
+            padding: 4px;
+            border: none;
+            cursor: pointer;
+        }
+        .Complete:hover {
+            background-color: rgba(255, 255, 0, 0.123);
+        }
+
+        .in3 {
+            max-width: 200px;
+            border-top: none;
+            border-bottom: 1px solid black;
+            border-left: none;
+            border-right: none;
+            outline: none;
+            background-color: inherit;
+            padding: 5px;
+            margin: 20px 0px;
+        }
+        .in3:focus {
+            border-bottom: 1px solid blue;
+        }
+        .textBox {
+            min-width: 10px;
+            padding: 15px;
+            font-size: 18px;
+            min-height: 200px;
+            max-height: 500px;
+            border-radius: 20px;
+            resize: none;
+            outline: none;
+            margin: 20px 0px;
+        }
+        .input44:focus {
+            transform: scale(1.1);
+        }
+        .btn5 {
+            background-color: yellow;
+            color: black;
+            width: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid blue;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        .btn5:hover ,.btn4:hover {
+            background: linear-gradient(
+                45deg,
+                rgb(0, 0, 0), 
+                rgb(0, 255, 24)
+            );
+            color: white;
+        }
+        .btns3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+        .btn4 {
+            background-color: yellow;
+            color: black;
+            width: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid blue;
+            cursor: pointer;
+        }
+        .hs {
+            text-align: center;
+        }
+        
+        
+        .folders {
+            display: flex;
+            justify-content: left;
+            padding: 15px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .folder {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            background-color: rgb(224, 223, 223);
+            min-width: 250px;
+            max-height: 100px;
+            padding: 5px;
+            border-radius: 15px;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .folder:hover {
+            transform: scale(1.1);
+            background: rgb(230, 230, 230);
+            box-shadow: 0 0 20px rgb(255, 255, 255);
+        }
+        .btns7 {
+            margin: 0 5px 0 auto;
+            background-color: red;
+            background-color: rgba(240, 248, 255, 0);
+            display: flex;
+            justify-content: right;
+        }
+        .bbttnn {
+            background-color: rgb(255, 255, 255);
+            margin: 2px 2px 0 0;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .bbttnn:active {
+            background-color: rgb(255, 0, 0);
+        }
+
+        .in {
+            margin: 10px;
+            max-width: 130px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 2px solid rgb(0, 4, 128);
+            background-color: rgba(240, 248, 255, 0);
+            outline: none;
+            padding: 5px;
+            
+        }
+        .in:focus {
+            border-bottom: 2px solid rgb(21, 0, 255);
+        }
+
+        .Add {
+            background-color: rgb(212, 224, 208);
+            display: flex;
+            justify-content: left;
+            padding: 15px;
+            color: rgb(0, 0, 0);
+            border-radius: 20px;
+            min-width: 300px;
+        }
+        .in2 {
+            font-size: 20px;
+            width: 200px;
+            background-color: rgba(240, 248, 255, 0);
+            outline: none;
+            color: rgb(0, 0, 0);
+            padding: 10px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            margin: 15px;
+        }
+
+        .btn5454 {
+            background-color: black;
+            color: yellow;
+            font-size: 17px;
+            cursor: pointer;
+            width: 40px;
+            height: 35px;
+            margin-top: 30px;
+            border-radius: 15px;
+
+        }
+
+
+        .jjjj { 
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+        }
+        .all {
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .taskDiv {
+            max-width: 300px;
+            background-color: rgb(248, 248, 248);
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            min-width: 200px;
+            padding: 15px;
+            border-radius: 20px;
+            gap: 10px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.63);
+            max-height: 1000px;
+        }
+        .btn19 {
+            max-width: 40px;
+            background-color: rgba(234, 234, 234, 0.107);
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .btn190 {
+            max-width: 40px;
+            background-color: rgba(234, 234, 234, 0.107);
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            margin-left: auto;
+        }
+        .oopp {
+            max-width: 300px;
+            overflow-wrap: anywhere;
+        }
+        .hr {
+            width: 100%;
+        }
+        .nnnn {
+            margin-top: -10px;
+            margin-bottom: -10px;
+        }
+        .botn {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .btn19:hover, .btn190:hover {
+            background-color: rgb(224, 224, 224);
+        }
+        .Complete {
+            background: rgba(0, 255, 0, 0.059);
+            border-radius: 20px;
+            max-width: 40px;
+            padding: 4px;
+            border: none;
+            cursor: pointer;
+        }
+        .Complete:hover {
+            background-color: rgba(255, 255, 0, 0.123);
+        }
+
+
+        .iamtired {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: rgb(244, 244, 244);
+            max-width: 300px;
+            gap: 10px;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 0 5px rgb(0, 238, 255);
+        }
+        .textBox2 {
+            min-width: 10px;
+            padding: 15px;
+            font-size: 18px;
+            min-height: 300px;
+            max-height: 500px;
+            border-radius: 20px;
+            resize: none;
+            outline: none;
+            margin: 20px 0px;
+        }
+        .btn44 {
+            background-color: rgb(255, 255, 255);
+            padding: 10px;
+            margin-right: auto;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        .btn44:hover {
+            background: rgb(130, 0, 115);
+            color: white;
+        }
+
+        .wowwow {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .completed {
+            box-shadow: 0 0 10px rgb(4, 255, 0);
+        }
+        
+        .ss {
+            background-color: rgb(249, 249, 249);
+            padding: 20px;
+            border-radius: 15px;
+            font-family: "Poppins", sans-serif;
+        }
+        .ss2 {
+            background-color: rgb(249, 249, 249);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: right;
+            font-family: "Vazirmatn", sans-serif;
+        }
+
+        .ss::selection, .ss2::selection {
+            background-color: yellow;
+            color: black;
+        }
+        .ss:hover , .ss2:hover {
+            letter-spacing: 0.1px;
+        }
+
+        .finishBtn {
+            padding: 10px;
+            border: 4px dotted blue;
+            border-radius: 15px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: rgb(238, 255, 0);
+            width: 100px;
+            font-weight: bold;
+        }
+        
