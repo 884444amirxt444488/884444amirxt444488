@@ -4,6 +4,13 @@ import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query"
 import TaskItem from "./TaskItem"
 import type { AxiosError } from "axios"
 import { useState } from "react"
+import {
+    DndContext,
+    closestCenter,
+    type DragEndEvent
+} from "@dnd-kit/core"
+import { SortableContext, verticalListSortingStrategy, arrayMove } from "@dnd-kit/sortable"
+
 
 
 type TaskType = {
@@ -147,6 +154,26 @@ function Task({columnId}: ColumnId) {
         }
     })
 
+    const handleDrag = async(event: DragEndEvent) => {
+        const {active, over} = event
+        if (!over || active.id === over.id) return
+
+        const oldIndex = TaskItems.findIndex(item => item._id === active.id)
+        const newIndex = TaskItems.findIndex(item => item._id === over.id)
+
+        const newTask = arrayMove(TaskItems, oldIndex, newIndex)
+
+        queryClient.setQueryData(["Tasks", columnId], newTask)
+
+        await api.patch("/reorder", {
+            columnId,
+            tasks: newTask.map((item, index) => ({
+                _id: item._id,
+                order: index
+            }))
+        })
+    }
+
 
     return (
         <div className="wowwow">
@@ -163,38 +190,49 @@ function Task({columnId}: ColumnId) {
                 }}>Add</button>
             </div>
             <hr />
-            <div className="jjjj">
-                {
-                    TaskItems.map((item) => (
-                        <TaskItem key={item._id} 
-                            task={item}
-                            onDelete={() => {
-                                deleteTask.mutate({
-                                    _id: item._id,
-                                    columnId
-                                })
-                            }}
-                            onEdit={(task2, description2) => {
-                                
-                                editTask.mutate({
-                                    _id: item._id,
-                                    columnId,
-                                    task: task2,
-                                    description: description2,
-                                })
-                            }}
-                            onCompleted={(completed) => {
-                                editTask.mutate({
-                                    _id: item._id,
-                                    columnId,
-                                    completed: !item.completed
-                                })
-                            }}
-                        />
-                    ))
-                }
-            </div>
+            <DndContext
+                collisionDetection={closestCenter} 
+                onDragEnd={handleDrag}
+            >
+                <SortableContext
+                    items={TaskItems.map(item => item._id)}
+                    strategy={verticalListSortingStrategy}
+                >
+                    <div className="jjjj">
+                        {
+                            TaskItems.map((item) => (
+                                <TaskItem key={item._id} 
+                                    task={item}
+                                    onDelete={() => {
+                                        deleteTask.mutate({
+                                            _id: item._id,
+                                            columnId
+                                        })
+                                    }}
+                                    onEdit={(task2, description2) => {
+                                        
+                                        editTask.mutate({
+                                            _id: item._id,
+                                            columnId,
+                                            task: task2,
+                                            description: description2,
+                                        })
+                                    }}
+                                    onCompleted={(completed) => {
+                                        editTask.mutate({
+                                            _id: item._id,
+                                            columnId,
+                                            completed: !item.completed
+                                        })
+                                    }}
+                                />
+                            ))
+                        }
+                    </div>
+                </SortableContext>
+            </DndContext>
         </div>
+        
     )
 }
 

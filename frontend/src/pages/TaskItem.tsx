@@ -1,4 +1,7 @@
 import { useState } from "react"
+import {CSS} from "@dnd-kit/utilities"
+import {useSortable} from "@dnd-kit/sortable"
+
 
 type TaskItems = {
     _id: string,
@@ -17,6 +20,25 @@ type TaskType = {
 
 
 function TaskItem({task, onDelete, onEdit, onCompleted}: TaskType) {
+
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+        isDragging
+    } = useSortable({
+        id: task._id
+    })
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0.5 : 1
+    }
+
+
     const [editTrue, setEditTrue] = useState(false)
     const [task2, setTask2] = useState("")
     const [description2, setDescription2] = useState("")
@@ -24,8 +46,15 @@ function TaskItem({task, onDelete, onEdit, onCompleted}: TaskType) {
     const [completed, setCompleted] = useState(task.completed)
     
     return (
-        <div className="all">
-            <div className={`taskDiv ${task.completed ? "completed" : ""}`}>
+        <div
+        ref={setNodeRef}
+            style={style}
+            {...attributes}
+        className="all">
+            <div className={`taskDiv ${task.completed ? "completed" : ""}`} >
+                <div className="drag"
+                {...listeners}
+                > ☰</div>
                 <div className="botn">
                     <button className="btn19" onClick={() => {
                         editTrue

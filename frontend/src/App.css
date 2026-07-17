@@ -1,4 +1,6 @@
-
+.drag {
+    cursor: pointer;
+}
 
 .ff {
   background-color: rgb(46, 0, 91);

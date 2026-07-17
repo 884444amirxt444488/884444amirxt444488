@@ -122,7 +122,25 @@ exports.deleteAllTasks = async(req, res) => {
 }
 
 
+exports.reorder = async(req, res) => {
+    const {tasks, columnId} = req.body
+    const userId = req.user._id
 
+    if (!Array.isArray(tasks)) {
+        return res.status(400).json({message: "Tasks are required"})
+    }
+
+    try {
+        for (const task of tasks) {
+            await Task.findOneAndUpdate({_id: task._id, columnId}, {order: task.order})
+        }
+        res.status(200).json({message: "Updated successfully"})
+    }
+    catch (err) {
+        console.error(`Error to reorder task: `, err)
+        res.status(500).json({message: "Error from server. please try later"})
+    }
+}
 
 
 

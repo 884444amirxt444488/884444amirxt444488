@@ -9,6 +9,7 @@ router.delete("/deleteTask/:taskId", authenciateAccessToken, taskController.dele
 router.delete("/deleteAllTasks/:columnId", authenciateAccessToken, taskController.deleteAllTasks)
 router.patch("/editTask/:taskId", authenciateAccessToken, taskController.editTask)
 router.get("/getTasks/:columnId", authenciateAccessToken, taskController.getTasks)
+router.patch("/reorder", authenciateAccessToken, taskController.reorder)
 
 
 
